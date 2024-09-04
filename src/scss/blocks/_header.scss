@@ -1,0 +1,80 @@
+.header {
+    &-container {
+        max-width: 1440px;
+        height: 50px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: end;
+        padding: 0 20px;
+    }
+    background-color: #564c4c;
+    position: relative;
+    &-form {
+        position: absolute;
+        top: 7px;
+        left: 50%;
+        input {
+            height: 34px;
+            padding: 0 10px;
+            width: 500px;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+        &__choices {
+            position: relative;
+            height: 150px;
+            &--container {
+                position: absolute;
+                width: 100%;
+            }
+            &--item {
+                height: 50px;
+                width: 100%;
+                display: flex;
+                justify-content: start;
+                align-items: center;
+                padding-left: 10px;
+                background-color: rgb(255, 255, 255);
+                border-top: 3px solid black;
+                cursor: pointer;
+                transition: all 0.4s ease-in;
+                &:hover {
+                    background-color: rgb(109, 103, 103);
+                }
+                h1 {
+                    color: #000;
+                    font-family: "Inter", sans-serif;
+                    font-size: 23px;
+                }
+            }
+        }
+    }
+}
+body {
+    background: rgb(53,53,60);
+    background: linear-gradient(319deg, rgba(53,53,60,1) 0%, rgba(136,127,127,1) 52%);
+    height: 100vh;
+}
+.loading-block {
+    width: 100vw;
+    height: 100vh;
+    background: rgb(53,53,60);
+    background: linear-gradient(207deg, rgba(53,53,60,1) 0%, rgba(255,235,235,1) 40%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 99;
+    &__header {
+        font-family: "Bree", sans-serif;
+        color: #625d5d;
+        font-size: 20px;
+    }
+
+}
+.form-active {
+    overflow-y: scroll;
+}
