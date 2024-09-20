@@ -1,5 +1,5 @@
 import React, { FC, useState, useEffect } from 'react'
-
+import { ToastContainer, Toast } from 'react-bootstrap'
 // Компоненты
 
 import Header from './Header'
@@ -19,18 +19,21 @@ const App: FC = () => {
         
     }   
     const [choices, setChoices] = useState<string[]>([])
-
+    const [showError, handleShowError] = useState<boolean>(false)
     // Получение данных о погоде по городу
     const [city, setCity] = useState<string>('')
     const getWeather = (city: string) => {
-        const userAPI: string = 'ce6fe1bbe88ecc076e0f13534d97e475'
+        const userAPI: string = 'ce6fe1bbe88ecc076e0f13534d97e47' /* 5 */
         const api: string = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${userAPI}&lang=en`
         console.log('Данные получены по адресу : ', api)
         return new Promise((res, rej) => {
             axios(api).then((obj) => {
                 res(obj.data)
+                deleteLoad()
             }).catch((error) => {
                 console.error('Ошибка при получении данных', error)
+                handleShowError(true)
+                deleteLoad()
             })
         }).then((obj: any) => {
             setCityName(obj.name)
@@ -101,10 +104,17 @@ const App: FC = () => {
     const [isLoad, setIsLoad] = useState<boolean>(false)
     const [temp, setTemp] = useState<number>(0)
     const [cityName, setCityName] = useState<string>('')
+    const [load, setLoad] = useState<boolean>(false)
+    const showLoad = () => {
+        setLoad(true)
+    }
+    const deleteLoad = () => {
+        setLoad(false)
+    }
     return (
         <>
-            <Header cities={cities} searchCity={searchCity} choiceLen={choices.length} choice={choices} definition={getWeather}/>
-            <Weather cityName={cityName} temp={temp} desc={desc}/>
+            <Header cities={cities} showLoad={showLoad} searchCity={searchCity} choiceLen={choices.length} choice={choices} definition={getWeather}/>
+            <Weather cityName={cityName} temp={temp} desc={desc} load={load} />
             <>
                 {
                     !isLoad && 
@@ -114,6 +124,14 @@ const App: FC = () => {
                     </div>
                 }
             </>
+            <ToastContainer className="p-3 position-fixed bottom-0 end-0" >
+                <Toast show={showError} delay={9000} onClose={() => handleShowError(false)} autohide className='bg-danger'>
+                    <Toast.Header className="bg-dark">
+                        <strong className="me-auto" style={{color: "white"}}>Внимание!</strong>
+                    </Toast.Header>
+                    <Toast.Body>Произошла ошибка. Попробуйте позже.</Toast.Body>
+                </Toast>
+            </ToastContainer>
         </>
     )
 }
