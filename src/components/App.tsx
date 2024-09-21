@@ -23,7 +23,7 @@ const App: FC = () => {
     // Получение данных о погоде по городу
     const [city, setCity] = useState<string>('')
     const getWeather = (city: string) => {
-        const userAPI: string = 'ce6fe1bbe88ecc076e0f13534d97e47' /* 5 */
+        const userAPI: string = 'ce6fe1bbe88ecc076e0f13534d97e475'
         const api: string = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${userAPI}&lang=en`
         console.log('Данные получены по адресу : ', api)
         return new Promise((res, rej) => {
