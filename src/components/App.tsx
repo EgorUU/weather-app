@@ -65,18 +65,13 @@ const App: FC = () => {
 
     const pushCity: TypePushCity = (obj) => {
         setCities((prevCities: any) => {
-            // Копируем предыдущий массив городов, чтобы не мутировать его напрямую
             const newCities = [...prevCities];
-    
             obj.forEach((el: any) => {
-                setTimeout(() => {
-                    const firstLetter = el.name[0].toLowerCase();
-    
-                    const index = firstLetter.charCodeAt(0) - 'a'.charCodeAt(0);
-                    if (index >= 0 && index < 26) {
-                        newCities[index] = [...(newCities[index] || []), el.name];
-                    }
-                }, 0)
+                const firstLetter = el.name[0].toLowerCase();
+                const index = firstLetter.charCodeAt(0) - 'a'.charCodeAt(0);
+                if (index >= 0 && index < 26) {
+                    newCities[index] = [...(newCities[index] || []), el.name];
+                }
             });
             setIsLoad(true)
             return newCities;

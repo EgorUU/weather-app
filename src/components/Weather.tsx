@@ -69,7 +69,12 @@ const Weather: FC<Props> = ({ cityName, temp, desc, load }) => {
                     </div>
                     <div className="card-body d-flex">
                         <div className='card-title d-flex' style={{position: "relative"}}>
-                            <div style={{fontSize: "60px"}}>{temp}</div>
+                        <div style={{fontSize: "60px"}}>{temp.toString().length > 1 ? temp : (
+                            <>
+                                <span style={{opacity: '0'}}>.</span>
+                                <span>{temp}</span>
+                            </>
+                        )}</div>
                             <WiCelsius id="cel" style={{fontSize: "65px", position: "absolute", left: "50px", top: "10px"}} />
                         </div>
                         <img src={img} style={{position: "absolute", left: "95px"}} />
